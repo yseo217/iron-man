@@ -1,15 +1,16 @@
 # IRON MAN 점검 결과 (CHECK)
 
-> 점검일: 2026-09-18 (배포 뒤 최종) · 기준 문서: [PLAN.md](PLAN.md) 성공 기준, [DESIGN.md](DESIGN.md) v0.3 · 점검 도구: bkit gap-detector, bkit security-architect
+> 점검일: 2026-09-18 (배포 점검 뒤 최종) · 기준 문서: [PLAN.md](PLAN.md) 성공 기준, [DESIGN.md](DESIGN.md) v0.3 · 점검 도구: bkit gap-detector, bkit security-architect
 > 배포 주소: https://iron-man-neon.vercel.app · 공개 코드 저장소: https://github.com/yseo217/iron-man (데이터·알림 발송은 비공개 저장소 yseo217/my-app)
 
-## 판정: ✅ 통과 (성공 기준 11개 모두 충족)
+## 판정: ✅ 통과 (성공 기준 11/11, 배포 점검 5/5 — 발표 준비 완료)
 
 | 점검 | 결과 | 요약 |
 |---|---|---|
 | 성공 기준 (PLAN.md) | ✅ **11 / 11 충족** | 마지막 남았던 "휴대폰 홈 화면에 추가"를 배포 뒤 아이폰에서 확인 |
 | 설계 일치 (Gap) | ✅ 1차 **약 89%** → 16개 중 **15개 해결**, 1개 남음 (선택) | 남은 것: PIN 잠금 장난(Gap 10). 해결 뒤 일치율은 다시 재지 않음 |
-| 보안 점검 | ✅ 치명적 위험 없음 | 코드로 고칠 8개 고침, PIN 변경, 저장소 비공개 확인, `npm audit` 취약점 0개. 남은 설정 2개는 선택 |
+| 보안 점검 | ✅ 치명적 위험 없음 | 코드로 고칠 8개 고침, PIN 변경, 데이터 저장소 비공개 확인, 배포 서버 토큰을 데이터 저장소 전용으로 교체, `npm audit` 취약점 0개. 남은 설정 2개는 선택 |
+| 배포 점검 (Part 5) | ✅ **5 / 5 통과** | 저장소 기록 모두 올라감, 공개 저장소에 README 있고 `.env`·`data/` 없음, Vercel 연결, 배포 주소 200, 환경 변수는 앱이 쓰는 키 7개만 |
 
 ---
 
@@ -23,7 +24,21 @@
 | 2 | Vercel 방화벽으로 접속 횟수 제한 | 보안 3·4 | GitHub 읽기 60초 재사용과 모델 버튼 PIN으로 위험이 많이 줄었어요. 남은 건 PIN 잠금 장난 정도예요 | Claude (문제가 생기면) |
 | 3 | 누구든 PIN을 5번 틀리면 나까지 10분 잠김 | Gap 10 · 보안 4 | PIN을 영문+숫자로 바꿔 맞히기는 어려워졌어요. 실제로 잠기는 일이 생기면 2번을 하거나 틀린 횟수를 저장소에 기록해요 | Claude (필요할 때) |
 
-> 관리 메모: 공개 저장소(iron-man)는 2026-09-18 코드의 사본이에요. 코드를 고치면 공개 저장소에도 다시 올리고, 배포는 Vercel CLI로 해요 (`vercel.json`으로 GitHub 자동 배포는 꺼 둠).
+> 관리 메모: 공개 저장소(iron-man)는 비공개 저장소(my-app)의 코드 사본이에요 (`data/`, `.github` 제외). 코드를 고치면 공개 저장소에도 새 커밋으로 맞춰 올리고, 배포는 Vercel CLI로 해요 (`vercel.json`으로 GitHub 자동 배포는 꺼 둠).
+
+---
+
+## 배포 점검 (Part 5)
+
+| # | 항목 | 결과 | 근거 |
+|---|---|---|---|
+| 1 | origin이 GitHub 주소, 안 올린 커밋 없음 | ✅ | `https://github.com/yseo217/my-app.git`, 안 올린 커밋 0개, 커밋 안 한 수정 0개 |
+| 2 | 공개 저장소, README 있음, `.env` 없음 | ✅ | [yseo217/iron-man](https://github.com/yseo217/iron-man) 공개, README.md 있음, `.env`·`data/` 없음 (로그인 없이 확인). 데이터 저장소 my-app은 비공개(로그인 없이 404) |
+| 3 | Vercel 프로젝트 연결 (`.vercel`) | ✅ | 프로젝트 `iron-man` |
+| 4 | 배포 URL 200, 앱 제목 보임 | ✅ | https://iron-man-neon.vercel.app → HTTP 200, `IRON MAN`, "AI와 반도체 주요 기사" |
+| 5 | 앱이 쓰는 키만 등록 | ✅ | `DATA_REPO_TOKEN`, `GITHUB_REPO`, `SUBSCRIBE_PIN`, `OPENAI_API_KEY`, 알림 키 3개. `GITHUB_TOKEN`·`VERCEL_TOKEN`·`SUPABASE_ACCESS_TOKEN` 없음 |
+
+결론: **발표 준비 완료**
 
 ---
 
@@ -93,5 +108,6 @@
 - 브라우저(배포용 빌드): 카드 5장, 3줄 요약, 영상, 알림 칸 정상. 보안 헤더 때문에 막힌 곳 없음
 - 배포(Vercel CLI): 환경 변수 7개 등록(관리용 VERCEL_TOKEN·SUPABASE_ACCESS_TOKEN 제외). 배포 주소에서 카드 5장, 3줄 요약, 영상, 알림 칸, 모델 선택, 지난 기사 15건, 기사 화면, 보안 헤더, 앱 정보 파일, 서비스 워커 정상, 콘솔 오류 없음
 - 공개 저장소: 로그인 없이 봐도 `data/` 폴더 없음(404), `.env`·`node_modules` 없음
+- 배포 서버 토큰 교체: 데이터 저장소 전용 토큰은 my-app 쓰기 가능, 다른 저장소 쓰기 거절(403). 교체 뒤 배포 주소에서 지난 기사 15건·기사 화면 정상
 - 배포 주소에서 아이폰 알림 켜기 확인 (2026-09-18 05:01 UTC)
 - 모델 버튼: PIN 없이 누르거나 틀린 PIN을 넣으면 거절되는 것 확인 (맞는 PIN은 사용자가 직접 확인)
