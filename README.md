@@ -46,7 +46,7 @@ npm run dev
 
 | 이름 | 용도 |
 |---|---|
-| `GITHUB_TOKEN`, `GITHUB_REPO` | 데이터(`data/`)를 저장할 비공개 저장소와 그 저장소 전용 토큰 |
+| `DATA_REPO_TOKEN`, `GITHUB_REPO` | 데이터(`data/`)를 저장할 비공개 저장소와, 그 저장소 하나만 파일 읽기·쓰기할 수 있는 세분화 토큰 (없으면 `GITHUB_TOKEN`을 씀) |
 | `NEXT_PUBLIC_VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` | 웹 푸시 알림 키 |
 | `OPENAI_API_KEY` | 한국어 요약 (없으면 요약 없이 동작) |
 | `SUBSCRIBE_PIN` | 알림 켜기·끄기와 요약 모델 바꾸기에 필요한 PIN |

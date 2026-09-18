@@ -31,19 +31,21 @@ function githubHeaders(token: string, accept: string): HeadersInit {
 }
 
 /**
+ * 토큰은 데이터 저장소 전용 DATA_REPO_TOKEN(배포 서버용, my-app 파일 읽기·쓰기만)을 먼저 쓰고,
+ * 없으면 GITHUB_TOKEN(GitHub Actions가 자동으로 주는 토큰·내 PC)을 쓴다.
  * 저장소 이름은 .env의 GITHUB_REPO를 쓰고, 없으면
  * GitHub Actions·Vercel이 자동으로 넣어주는 값을 쓴다.
  */
 function githubConfig(): { token: string; repo: string } {
   const env = process.env;
-  const token = env.GITHUB_TOKEN;
+  const token = env.DATA_REPO_TOKEN || env.GITHUB_TOKEN;
   const vercelRepo =
     env.VERCEL_GIT_REPO_OWNER && env.VERCEL_GIT_REPO_SLUG
       ? `${env.VERCEL_GIT_REPO_OWNER}/${env.VERCEL_GIT_REPO_SLUG}`
       : undefined;
   const repo = env.GITHUB_REPO || env.GITHUB_REPOSITORY || vercelRepo;
   if (!token || !repo) {
-    throw new Error("GITHUB_TOKEN 또는 GITHUB_REPO 환경 변수가 없어요");
+    throw new Error("DATA_REPO_TOKEN(또는 GITHUB_TOKEN)이나 GITHUB_REPO 환경 변수가 없어요");
   }
   return { token, repo };
 }
