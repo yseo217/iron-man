@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- IRON MAN 앱 아이콘 원본: 남색 바탕 위의 빨간 반도체 칩(흰 다리). 가운데 80% 안에 그려서 원형으로 잘려도 보인다 -->
+  <rect width="512" height="512" fill="#0c2340"/>
+  <g fill="#ffffff">
+    <rect x="173" y="96" width="16" height="40" rx="4"/>
+    <rect x="221" y="96" width="16" height="40" rx="4"/>
+    <rect x="275" y="96" width="16" height="40" rx="4"/>
+    <rect x="323" y="96" width="16" height="40" rx="4"/>
+    <rect x="173" y="376" width="16" height="40" rx="4"/>
+    <rect x="221" y="376" width="16" height="40" rx="4"/>
+    <rect x="275" y="376" width="16" height="40" rx="4"/>
+    <rect x="323" y="376" width="16" height="40" rx="4"/>
+    <rect x="96" y="173" width="40" height="16" rx="4"/>
+    <rect x="96" y="221" width="40" height="16" rx="4"/>
+    <rect x="96" y="275" width="40" height="16" rx="4"/>
+    <rect x="96" y="323" width="40" height="16" rx="4"/>
+    <rect x="376" y="173" width="40" height="16" rx="4"/>
+    <rect x="376" y="221" width="40" height="16" rx="4"/>
+    <rect x="376" y="275" width="40" height="16" rx="4"/>
+    <rect x="376" y="323" width="40" height="16" rx="4"/>
+    <rect x="136" y="136" width="240" height="240" rx="32" fill="#bd3039"/>
+  </g>
+  <rect x="192" y="192" width="128" height="128" rx="16" fill="#0c2340"/>
+  <circle cx="256" cy="256" r="28" fill="#ffffff"/>
+</svg>

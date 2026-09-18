@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+/* 스포츠 뉴스 사이트 느낌의 색: 짙은 남색 + 빨강 + 밝은 회색 배경 */
+:root {
+  --background: #f5f5f5;
+  --foreground: #070a0d;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-navy: #0c2340;
+  --color-navy-deep: #081a31;
+  --color-brand-red: #bd3039;
+  --color-brand-red-dark: #9e2530;
+  --font-sans: var(--font-geist-sans), "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #05101f;
+    --foreground: #eef1f5;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+/* 머리글이 위에 붙어 있으니, 목차 링크로 이동할 때 제목이 가려지지 않게 */
+html {
+  scroll-padding-top: 7rem;
+}
